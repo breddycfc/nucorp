@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NuCorp Energy (Pty) Ltd - About Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #014d65;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: #9cd84b;
+            text-decoration: underline;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: #014d65;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Leadership Team */
+        .leadership-team {
+            padding: 5rem 0;
+            background: #fdfcf9;
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            color: #014d65;
+            text-transform: uppercase;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+        }
+        
+        .team-grid {
+            display: grid;
+            gap: 4rem;
+        }
+        
+        .team-member {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: start;
+            margin-bottom: 4rem;
+        }
+        
+        .member-photo {
+            text-align: center;
+        }
+        
+        .member-img {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .member-info h3 {
+            font-size: 1.8rem;
+            color: #014d65;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .member-info h4 {
+            font-size: 1.2rem;
+            color: #9cd84b;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .member-info p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .member-info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .member-info li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .member-info li:before {
+            content: "•";
+            color: #9cd84b;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Experience Section */
+        .experience-track-record {
+            padding: 5rem 0;
+            background: #fff;
+        }
+        
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .experience-section {
+            background: #fdfcf9;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .experience-section h3 {
+            color: #014d65;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        
+        .experience-section ul {
+            list-style: none;
+        }
+        
+        .experience-section li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .experience-section li:before {
+            content: "→";
+            color: #9cd84b;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Competitive Advantages */
+        .competitive-advantages {
+            padding: 5rem 0;
+            background: #014d65;
+            color: white;
+        }
+        
+        .competitive-advantages .section-title {
+            color: white;
+            margin-bottom: 2rem;
+        }
+        
+        .advantages-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .advantage-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+        }
+        
+        .advantage-number {
+            background: #9cd84b;
+            color: #014d65;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .advantage-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        /* Sustainability Impact */
+        .sustainability-impact {
+            padding: 5rem 0;
+            background: #fdfcf9;
+        }
+        
+        .impact-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .impact-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .impact-section h3 {
+            color: #014d65;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        
+        .impact-section ul {
+            list-style: none;
+        }
+        
+        .impact-section li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+        
+        .impact-section li:before {
+            content: "✓";
+            color: #9cd84b;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .building-text {
+            text-align: center;
+            font-style: italic;
+            margin-top: 3rem;
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #191919;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: #9cd84b;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+        
+        .footer-section p {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: #9cd84b;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .team-member,
+            .experience-grid,
+            .impact-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .advantages-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="images/logo.png" alt="NuCorp Energy">
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">HOME</a></li>
+                    <li><a href="about.html" class="nav-link active">ABOUT</a></li>
+                    <li><a href="services.html" class="nav-link">SERVICES</a></li>
+                    <li><a href="technical.html" class="nav-link">TECHNICAL</a></li>
+                    <li><a href="partnership.html" class="nav-link">PARTNERSHIP</a></li>
+                    <li><a href="contact.html" class="nav-link">CONTACT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">ABOUT NUCORP ENERGY</h1>
+            <p class="page-subtitle">Leading the transformation of wastewater treatment and alternative energy in South Africa</p>
+        </div>
+    </section>
+
+    <!-- Leadership Team -->
+    <section class="leadership-team">
+        <div class="container">
+            <h2 class="section-title">LEADERSHIP TEAM</h2>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="images/Dr Grace Nke.png" alt="Dr. Grace Nkechinyere Ijoma" class="member-img">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dr. Grace Nkechinyere Ijoma</h3>
+                        <h4>Co-Founder & Chief Executive Officer</h4>
+                        
+                        <p>Dr. Ijoma is an internationally recognized expert in wastewater treatment and alternative energy technologies with over 15 years of industrial experience. As CEO, she brings world-class technical expertise and strategic vision to NuCorp Energy.</p>
+                        
+                        <p>Her credentials include:</p>
+                        <ul>
+                            <li>Senior Researcher at the University of South Africa (UNISA)</li>
+                            <li>Post-doctoral research supervision in Chemical Engineering</li>
+                            <li>Lead Researcher at the Institute for the Development of Energy for African Sustainability (IDEAS)</li>
+                            <li>Published expert on biogas, algal optimization, microalgae biodiesel, renewable, and anaerobic digestion systems</li>
+                            <li>International consultant on African energy initiatives across Kenya, Nigeria, Zambia, Namibia, and Rwanda</li>
+                            <li>Designer and implementer of biogas digesters for South African schools and farms</li>
+                            <li>Founder of BioSolve SA (Pty) Ltd</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-photo">
+                        <img src="images/Nathaniel Denton Bricknell.png" alt="Nathaniel Denton Bricknell" class="member-img">
+                    </div>
+                    <div class="member-info">
+                        <h3>Nathaniel Denton Bricknell</h3>
+                        <h4>Co-Founder & Chief Operating Officer</h4>
+                        
+                        <p>Nathaniel brings entrepreneurial acumen and operational excellence to NuCorp Energy, with extensive experience in operations, strategic partnerships, and financial structuring.</p>
+                        
+                        <p>As Founder and CEO of eDirect Limited, he has established expertise in:</p>
+                        <ul>
+                            <li>Co-founding and scaling multiple companies spanning call centers (1,200+ agents), real estate, digital media, and artificial intelligence across Africa (Namibia), and institutional investors</li>
+                            <li>Managing the Charles Stinson Investment Trust with R1.5bn+ returns</li>
+                            <li>Strategic deal structuring with government entities</li>
+                            <li>Expertise in structuring complex financial instruments and investment agreements</li>
+                            <li>International fundraising and investor relations</li>
+                            <li>Operational management and business scaling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Track Record -->
+    <section class="experience-track-record">
+        <div class="container">
+            <h2 class="section-title">EXPERIENCE & TRACK RECORD</h2>
+            
+            <div class="experience-grid">
+                <div class="experience-section">
+                    <h3>Research & Development</h3>
+                    <ul>
+                        <li>15 years of biogas optimization research at UNISA</li>
+                        <li>Leading researcher on anaerobic digestion technology for biogas production</li>
+                        <li>Multiple peer-reviewed publications on biogas technology and wastewater treatment</li>
+                        <li>Supervision of PhD students in Chemical Engineering</li>
+                        <li>International recognition in biogas and renewable energy systems</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-section">
+                    <h3>Implementation Experience</h3>
+                    <ul>
+                        <li>Design and installation of on-site biogas digesters (UNISA community projects)</li>
+                        <li>Consulting to South African municipalities on wastewater treatment upgrades</li>
+                        <li>Technical services to Free State and Limpopo municipalities on system optimization</li>
+                        <li>Advisory services on water and wastewater treatment infrastructure</li>
+                        <li>Wastewater treatment feasibility studies for multiple municipalities</li>
+                        <li>International consulting projects in Namibia, Kenya, and Rwanda</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-section">
+                    <h3>Current Engagements</h3>
+                    <ul>
+                        <li>Municipal wastewater treatment plant biogas feasibility studies</li>
+                        <li>Development energy integration projects for waste utilities</li>
+                        <li>Biogas-to-energy integration in complex water systems</li>
+                        <li>Agricultural sector project development</li>
+                        <li>Large-scale biogas project development</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Advantages -->
+    <section class="competitive-advantages">
+        <div class="container">
+            <h2 class="section-title">COMPETITIVE ADVANTAGES</h2>
+            
+            <div class="advantages-list">
+                <div class="advantage-item">
+                    <span class="advantage-number">1</span>
+                    <h3>Wastewater Treatment Excellence</h3>
+                </div>
+                <div class="advantage-item">
+                    <span class="advantage-number">2</span>
+                    <h3>Research-Backed Innovation</h3>
+                </div>
+                <div class="advantage-item">
+                    <span class="advantage-number">3</span>
+                    <h3>Integrated Expertise</h3>
+                </div>
+                <div class="advantage-item">
+                    <span class="advantage-number">4</span>
+                    <h3>African Context Understanding</h3>
+                </div>
+                <div class="advantage-item">
+                    <span class="advantage-number">5</span>
+                    <h3>Proven Track Record</h3>
+                </div>
+                <div class="advantage-item">
+                    <span class="advantage-number">6</span>
+                    <h3>Strategic Partnerships</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability Impact -->
+    <section class="sustainability-impact">
+        <div class="container">
+            <h2 class="section-title">SUSTAINABILITY IMPACT</h2>
+            
+            <div class="impact-content">
+                <div class="impact-section">
+                    <h3>Environmental Benefits</h3>
+                    <ul>
+                        <li>GHG Reduction: Each MW of biogas capacity reduces >15,000 tonnes CO2e annually</li>
+                        <li>Water Diversion: Preventing methane emissions from landfills and lagoons</li>
+                        <li>Water Quality: Significantly improved effluent quality from treatment facilities</li>
+                        <li>Water Security: Enhanced water treatment capacity and reuse potential</li>
+                        <li>Resource Efficiency: Nutrients and energy from wastewater streams</li>
+                        <li>Soil Health: Organic fertilizer replacing chemical inputs</li>
+                    </ul>
+                </div>
+                
+                <div class="impact-section">
+                    <h3>Social Benefits</h3>
+                    <ul>
+                        <li>Job Creation: 10-15 direct jobs per MW installed capacity</li>
+                        <li>Skills Development: Technical training in wastewater treatment and renewable energy</li>
+                        <li>Public Health: Improved sanitation through better sewage treatment</li>
+                        <li>Energy Access: Reliable power for communities and businesses</li>
+                        <li>Health Improvements: Reduced pollution, improved sanitation and cleaner water</li>
+                    </ul>
+                </div>
+                
+                <div class="impact-section">
+                    <h3>Economic Benefits</h3>
+                    <ul>
+                        <li>Energy Security: Reduced reliance on grid and fossil fuels</li>
+                        <li>Cost Savings: 30-50% reduction in energy costs, reduced water treatment costs</li>
+                        <li>Revenue Generation: New income streams from waste processing and energy sales</li>
+                        <li>Infrastructure Value: Modernized wastewater treatment infrastructure</li>
+                        <li>Local Development: Stimulating rural and peri-urban economies</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="building-text">
+                Building on the pioneering wastewater treatment and biogas research of BioSolve SA
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Head Office</h4>
+                    <p>Hyde Park Lane<br>Sandton, 2196<br>South Africa</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>General Inquiries</h4>
+                    <p>Email: <a href="mailto:info@nucorp.co.za">info@nucorp.co.za</a></p>
+                    <p>Website: <a href="#">www.nucorp.co.za</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Technical Inquiries</h4>
+                    <p>Dr. Grace Nkechinyere Ijoma<br>CEO</p>
+                    <p>Mobile: +250 839 3838</p>
+                    <p>Email: <a href="mailto:gnijoma@nucorp.co.za">gnijoma@nucorp.co.za</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Business Development</h4>
+                    <p>Nathaniel Denton Bricknell<br>COO</p>
+                    <p>Mobile: +27 83 450</p>
+                    <p>Email: <a href="mailto:ndbricknell@nucorp.co.za">ndbricknell@nucorp.co.za</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 NuCorp Energy (Pty) Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
