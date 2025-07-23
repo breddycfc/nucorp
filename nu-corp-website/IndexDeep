@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NuCorp Energy - Wastewater Treatment & Alternative Energy Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --emerald: #10b981;
+            --emerald-dark: #047857;
+            --slate: #334155;
+            --slate-light: #64748b;
+        }
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 78, 59, 0.2) 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+        }
+        
+        .service-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--emerald) 0%, var(--emerald-dark) 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+        
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .no-js .section-reveal {
+            opacity: 1;
+            transform: none;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .wave-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--emerald);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .accordion-content.active {
+            max-height: 500px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            transition: border-color 0.3s ease;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--emerald);
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="https://nucorpenergy.co.za/nu-corp-website/images/logo.png" alt="NuCorp Energy" class="h-10 w-auto">
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-slate-700 hover:text-emerald-600 font-medium">Home</a>
+                    <a href="#about" class="nav-link text-slate-700 hover:text-emerald-600 font-medium">About</a>
+                    <a href="#services" class="nav-link text-slate-700 hover:text-emerald-600 font-medium">Services</a>
+                    <a href="#markets" class="nav-link text-slate-700 hover:text-emerald-600 font-medium">Markets</a>
+                    <a href="#contact" class="nav-link text-slate-700 hover:text-emerald-600 font-medium">Contact</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-16 right-0 w-64 h-screen bg-white shadow-lg md:hidden">
+            <div class="p-4 space-y-4">
+                <a href="#home" class="block py-2 text-slate-700 hover:text-emerald-600">Home</a>
+                <a href="#about" class="block py-2 text-slate-700 hover:text-emerald-600">About</a>
+                <a href="#services" class="block py-2 text-slate-700 hover:text-emerald-600">Services</a>
+                <a href="#markets" class="block py-2 text-slate-700 hover:text-emerald-600">Markets</a>
+                <a href="#contact" class="block py-2 text-slate-700 hover:text-emerald-600">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center hero-gradient wave-bg">
+        <div class="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-slate-100/50"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="section-reveal">
+                    <h1 class="font-poppins text-5xl lg:text-7xl font-bold text-slate-900 leading-tight">
+                        Wastewater Treatment
+                        <span class="text-emerald-600">&</span> Alternative Energies
+                    </h1>
+                    <p class="mt-6 text-xl text-slate-600 leading-relaxed">
+                        Transforming waste into sustainable energy solutions for South Africa
+                    </p>
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="btn-primary inline-flex items-center px-8 py-4 text-white font-semibold rounded-lg">
+                            Contact Us
+                            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                        <a href="#about" class="inline-flex items-center px-8 py-4 border-2 border-emerald-600 text-emerald-600 font-semibold rounded-lg hover:bg-emerald-600 hover:text-white transition-all">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="floating-element">
+                        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-emerald-600">R50B</div>
+                                    <div class="text-sm text-slate-600">Market Potential</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-emerald-600">2022</div>
+                                    <div class="text-sm text-slate-600">Established</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-emerald-600">100%</div>
+                                    <div class="text-sm text-slate-600">Renewable</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-emerald-600">24/7</div>
+                                    <div class="text-sm text-slate-600">Support</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-poppins text-4xl lg:text-5xl font-bold text-slate-900 section-reveal">
+                    Transforming Environmental Challenges into Opportunities
+                </h2>
+                <p class="mt-4 text-xl text-slate-600 section-reveal">
+                    Led by Dr. Grace Ijoma, we're revolutionizing South Africa's sustainable infrastructure
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8 mb-16">
+                <div class="section-reveal">
+                    <div class="bg-gradient-to-br from-emerald-500 to-emerald-600 text-white p-8 rounded-2xl">
+                        <h3 class="font-poppins text-2xl font-bold mb-4">Vision</h3>
+                        <p>To be Africa's leading wastewater treatment and alternative energy solutions provider, transforming environmental challenges into sustainable energy opportunities.</p>
+                    </div>
+                </div>
+                
+                <div class="section-reveal">
+                    <div class="bg-gradient-to-br from-slate-600 to-slate-700 text-white p-8 rounded-2xl">
+                        <h3 class="font-poppins text-2xl font-bold mb-4">Mission</h3>
+                        <p>We revolutionize wastewater treatment through innovative alternative energy solutions, transforming waste challenges into valuable resources.</p>
+                    </div>
+                </div>
+                
+                <div class="section-reveal">
+                    <div class="bg-gradient-to-br from-emerald-100 to-emerald-200 text-emerald-900 p-8 rounded-2xl">
+                        <h3 class="font-poppins text-2xl font-bold mb-4">Values</h3>
+                        <ul class="space-y-2">
+                            <li>• Innovation & Research</li>
+                            <li>• Integrity & Trust</li>
+                            <li>• Excellence & Quality</li>
+                            <li>• Partnership & Collaboration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-reveal">
+                <div class="bg-slate-50 rounded-2xl p-8">
+                    <h3 class="font-poppins text-2xl font-bold text-slate-900 mb-4">Executive Summary</h3>
+                    <p class="text-slate-600 leading-relaxed">
+                        NuCorp Energy (Pty) Ltd specializes in wastewater treatment and alternative energy, addressing South Africa's dual crisis of aging water infrastructure and energy insecurity. We deliver comprehensive waste-to-energy solutions that transform organic waste streams into renewable electricity, heat, clean water, and organic fertilizer, unlocking the R50 billion potential of South Africa's biogas sector.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-poppins text-4xl lg:text-5xl font-bold text-slate-900 section-reveal">
+                    Comprehensive Solutions
+                </h2>
+                <p class="mt-4 text-xl text-slate-600 section-reveal">
+                    End-to-end services from feasibility to operations
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="service-card card-hover rounded-2xl p-6 section-reveal">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-bold text-slate-900 mb-2">Wastewater Treatment & Feasibility Studies</h3>
+                    <p class="text-slate-600">Comprehensive analysis and treatment solutions for wastewater infrastructure.</p>
+                </div>
+                
+                <div class="service-card card-hover rounded-2xl p-6 section-reveal">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.413-1.415 3.413H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-bold text-slate-900 mb-2">Engineering & Alternative Energy Solutions</h3>
+                    <p class="text-slate-600">Advanced engineering solutions for renewable energy integration.</p>
+                </div>
+                
+                <div class="service-card card-hover rounded-2xl p-6 section-reveal">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-bold text-slate-900 mb-2">Project Implementation & Management</h3>
+                    <p class="text-slate-600">Full project lifecycle management from conception to completion.</p>
+                </div>
+                
+                <div class="service-card card-hover rounded-2xl p-6 section-reveal">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-bold text-slate-900 mb-2">Operations & Maintenance Services</h3>
+                    <p class="text-slate-600">24/7 operational support and maintenance for sustained performance.</p>
+                </div>
+                
+                <div class="service-card card-hover rounded-2xl p-6 section-reveal">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-bold text-slate-900 mb-2">Financing & Investment Structuring</h3>
+                    <p class="text-slate-600">Innovative financing solutions to unlock project potential.</p>
+                </div>
+                
+                <div class="service-card card-hover rounded-2xl p-6 section-reveal">
+                    <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-bold text-slate-900 mb-2">Circular Economy Solutions</h3>
+                    <p class="text-slate-600">Sustainable circular economy models for resource optimization.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 section-reveal">
+                <a href="#contact" class="btn-primary inline-flex items-center px-8 py-4 text-white font-semibold rounded-lg">
+                    View All Services
+                    <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Markets Section -->
+    <section id="markets" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-poppins text-4xl lg:text-5xl font-bold text-slate-900 section-reveal">
+                    Target Markets
+                </h2>
+                <p class="mt-4 text-xl text-slate-600 section-reveal">
+                    Serving public and private sectors across South Africa
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-8 section-reveal">
+                    <div class="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-2xl font-bold text-slate-900 mb-4">Municipal Sector</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li>• Wastewater Treatment Plants</li>
+                        <li>• Municipal Infrastructure</li>
+                        <li>• Water-Energy Integration</li>
+                        <li>• Solid Waste Management</li>
+                        <li>• District Municipalities</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-8 section-reveal">
+                    <div class="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-2xl font-bold text-slate-900 mb-4">Agricultural Sector</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li>• Dairy Farms</li>
+                        <li>• Pig Farms</li>
+                        <li>• Poultry Operations</li>
+                        <li>• Crop Farms</li>
+                        <li>• Agricultural Residue</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl p-8 section-reveal">
+                    <div class="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-2xl font-bold text-slate-900 mb-4">Industrial Sector</h3>
+                    <ul class="space-y-2 text-slate-600">
+                        <li>• Food & Beverage</li>
+                        <li>• Abattoirs</li>
+                        <li>• Breweries & Distilleries</li>
+                        <li>• Retail Chains</li>
+                        <li>• Processing Waste</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="section-reveal">
+                    <h2 class="font-poppins text-4xl lg:text-5xl font-bold mb-6">
+                        Get in Touch
+                    </h2>
+                    <p class="text-slate-300 text-lg mb-8">
+                        Ready to transform your waste into sustainable energy? Contact our team today.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-emerald-600 rounded-full flex items-center justify-center mt-1">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-semibold">Head Office</h4>
+                                <p class="text-slate-300">Floor 3, Gleneagles Plaza<br>Hyde Park Lane, Sandton, 2196<br>South Africa</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-emerald-600 rounded-full flex items-center justify-center mt-1">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-semibold">General Inquiries</h4>
+                                <p class="text-slate-300">info@nucorp.co.za</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-6 h-6 bg-emerald-600 rounded-full flex items-center justify-center mt-1">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0012 11z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-semibold">Business Development</h4>
+                                <p class="text-slate-300">Nathaniel Denton Bricknell<br>ndbricknell@nucorp.co.za<br>074 736 8922</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-reveal">
+                    <form id="contact-form" class="contact-form space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Name</label>
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email</label>
+                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white">
+                        </div>
+                        
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-slate-300 mb-2">Company</label>
+                            <input type="text" id="company" name="company" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white">
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg text-white"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary w-full px-8 py-4 text-white font-semibold rounded-lg">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p>&copy; 2025 NuCorp Energy (Pty) Ltd. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        });
+        
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Simple form validation
+            if (!data.name || !data.email || !data.message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // In a real application, you would send this to a server
+            console.log('Form submitted:', data);
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+        
+        // GSAP animations (if GSAP is loaded)
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animate sections on scroll
+            gsap.utils.toArray('.section-reveal').forEach((element, index) => {
+                gsap.fromTo(element, 
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay: index * 0.1,
+                        scrollTrigger: {
+                            trigger: element,
+                            start: 'top 80%',
+                            toggleActions: 'play none none reverse'
+                        }
+                    }
+                );
+            });
+        }
+        
+        // Add no-js fallback
+        document.documentElement.classList.remove('no-js');
+    </script>
+</body>
+</html>
